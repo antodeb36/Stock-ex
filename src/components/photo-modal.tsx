@@ -62,22 +62,27 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl p-0">
-        <div className="grid md:grid-cols-2">
-            <div className="relative">
+      <DialogContent className="max-w-7xl p-0">
+        <div className="flex flex-col">
+            <div className="relative w-full h-[80vh] bg-black/90 flex items-center justify-center">
                 <Image
                     src={photo.src}
                     alt={photo.alt}
-                    width={photo.width}
-                    height={photo.height}
-                    className="object-contain w-full h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none"
+                    fill
+                    className="object-contain"
                     data-ai-hint={photo.dataAiHint}
                 />
             </div>
             <div className="flex flex-col p-6">
                 <DialogHeader>
                     <div className="flex justify-between items-start">
-                        <DialogTitle className="text-2xl font-bold font-headline mb-2 pr-8">{photo.alt}</DialogTitle>
+                        <div>
+                            <DialogTitle className="text-2xl font-bold font-headline mb-2 pr-8">{photo.alt}</DialogTitle>
+                            <DialogDescription className="flex items-center gap-2 text-base">
+                                <User className="h-4 w-4" />
+                                <span>Photo by {photo.photographer}</span>
+                            </DialogDescription>
+                        </div>
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
@@ -91,10 +96,6 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
-                    <DialogDescription className="flex items-center gap-2 text-base">
-                        <User className="h-4 w-4" />
-                        <span>Photo by {photo.photographer}</span>
-                    </DialogDescription>
                 </DialogHeader>
 
                 <div className="my-6">
