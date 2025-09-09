@@ -63,14 +63,16 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-7xl p-0">
-        <div className="flex flex-col">
-            <div className="relative w-full h-[80vh] bg-black/90 flex items-center justify-center">
+        <div className="grid grid-cols-1">
+            <div className="relative w-full bg-black/90 flex items-center justify-center max-h-[80vh]">
                 <Image
                     src={photo.src}
                     alt={photo.alt}
-                    fill
-                    className="object-contain"
+                    width={photo.width}
+                    height={photo.height}
+                    className="max-w-full max-h-[80vh] h-auto w-auto object-contain"
                     data-ai-hint={photo.dataAiHint}
+                    priority
                 />
             </div>
             <div className="flex flex-col p-6">
