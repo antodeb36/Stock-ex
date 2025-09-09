@@ -1,3 +1,5 @@
+'use client';
+
 import { Camera } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from './ui/button';
@@ -13,8 +15,12 @@ export function Header() {
           </Link>
         </div>
         <div className="flex items-center gap-2">
-            <Button variant="ghost">Log In</Button>
-            <Button variant="default">Sign Up</Button>
+          <Button variant="ghost" asChild>
+            <Link href="/login">Log In</Link>
+          </Button>
+          <Button variant="default" asChild>
+            <Link href="/signup">Sign Up</Link>
+          </Button>
         </div>
       </div>
     </header>
