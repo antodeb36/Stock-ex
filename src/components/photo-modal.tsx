@@ -5,6 +5,8 @@ import Image from 'next/image';
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
+  DialogDescription,
 } from '@/components/ui/dialog';
 import {
   DropdownMenu,
@@ -19,6 +21,7 @@ import type { Photo } from '@/lib/photos';
 import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface PhotoModalProps {
   photo: Photo;
@@ -70,6 +73,12 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="bg-transparent border-0 shadow-none p-0 w-full h-full max-w-none flex items-center justify-center">
+        <VisuallyHidden>
+          <DialogTitle>Image Details: {photo.alt}</DialogTitle>
+          <DialogDescription>
+            A larger view of the image titled "{photo.alt}" by {photo.photographer}. You can download the image in various sizes or view more information.
+          </DialogDescription>
+        </VisuallyHidden>
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={() => onOpenChange(false)} />
         
         <Button variant="ghost" size="icon" className="fixed top-4 left-4 text-white hover:bg-white/20 hover:text-white z-50 h-12 w-12" onClick={() => onOpenChange(false)}>
