@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -63,13 +64,13 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl p-0">
         <div className="grid md:grid-cols-2">
-            <div className="relative aspect-square md:aspect-auto">
+            <div className="relative">
                 <Image
                     src={photo.src}
                     alt={photo.alt}
                     width={photo.width}
                     height={photo.height}
-                    className="object-cover w-full h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none"
+                    className="object-contain w-full h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none"
                     data-ai-hint={photo.dataAiHint}
                 />
             </div>
