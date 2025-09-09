@@ -62,6 +62,36 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
     }
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: `Photo by ${photo.photographer}`,
+      text: `Check out this amazing photo: ${photo.alt}`,
+      url: window.location.href,
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        toast({ title: 'Shared successfully!' });
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({ title: 'Link Copied!', description: 'Photo page link copied to your clipboard.' });
+      }
+    } catch (error) {
+      toast({
+        title: 'Sharing Failed',
+        description: 'Could not share the photo at this time.',
+        variant: 'destructive',
+      });
+    }
+  };
+  
+  const handleMoreInfo = () => {
+    toast({
+        title: 'Free To Use License',
+        description: 'All photos on PhotoSphere are free to use for personal and commercial projects. Attribution is not required but always appreciated.',
+    })
+  }
+
   const getInitials = (name: string) => {
     const names = name.split(' ');
     if (names.length > 1) {
@@ -151,8 +181,8 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
               <p className="mt-1 text-foreground font-medium">{photo.alt}</p>
             </div>
             <div className="flex items-center gap-2">
-                <Button variant="outline"><Info className="mr-2" /> More Info</Button>
-                <Button variant="outline"><Share2 className="mr-2" /> Share</Button>
+                <Button variant="outline" onClick={handleMoreInfo}><Info className="mr-2" /> More Info</Button>
+                <Button variant="outline" onClick={handleShare}><Share2 className="mr-2" /> Share</Button>
             </div>
           </footer>
         </div>
