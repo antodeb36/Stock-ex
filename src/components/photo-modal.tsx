@@ -62,7 +62,7 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-7xl grid grid-rows-[1fr_auto] gap-0 p-0 h-screen max-h-[90vh]">
+      <DialogContent className="max-w-7xl grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-0 p-0 h-screen max-h-[90vh]">
         <div className="relative flex items-center justify-center overflow-hidden bg-black/90 min-h-0">
             <Image
                 src={photo.src}
@@ -74,7 +74,7 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
                 priority
             />
         </div>
-        <div className="flex flex-col p-6 bg-card">
+        <div className="flex flex-col p-6 bg-card overflow-y-auto">
             <DialogHeader>
                 <div className="flex justify-between items-start">
                     <div>
