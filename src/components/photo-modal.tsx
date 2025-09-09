@@ -32,23 +32,18 @@ interface PhotoModalProps {
 export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
   const { toast } = useToast();
 
-  const getDownloadUrl = (width: number, height: number) => {
-    const baseUrl = photo.src.split('/').slice(0, -2).join('/');
-    return `${baseUrl}/${width}/${height}`;
-  }
-
   const handleDownload = async (url: string, filename: string) => {
     try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Network response was not ok.');
-      const blob = await response.blob();
+      // Since we are downloading from an external URL (Google Drive),
+      // we can just link directly to it. The browser will handle the download.
       const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = filename;
+      link.href = url;
+      link.target = "_blank"; // Open in a new tab to initiate download
+      link.download = filename; // Suggest a filename
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      URL.revokeObjectURL(link.href);
+
       toast({
         title: "Download Started",
         description: `${filename} is being downloaded.`,
@@ -153,8 +148,8 @@ export function PhotoModal({ photo, isOpen, onOpenChange }: PhotoModalProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => handleDownload(getDownloadUrl(640, Math.round(640 * (photo.height/photo.width))), `photosphere-${photo.id}-small.jpg`)}>Small (640w)</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleDownload(getDownloadUrl(1920, Math.round(1920 * (photo.height/photo.width))), `photosphere-${photo.id}-medium.jpg`)}>Medium (1920w)</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDownload(photo.src, `photosphere-${photo.id}-small.jpg`)}>Small</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDownload(photo.src, `photosphere-${photo.id}-medium.jpg`)}>Medium</DropdownMenuItem>
                     <DropdownMenuItem onClick={() => handleDownload(photo.src, `photosphere-${photo.id}-original.jpg`)}>Original Size</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
