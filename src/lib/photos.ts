@@ -60,4 +60,59 @@ function generatePhotos(count: number): Photo[] {
   return photos;
 }
 
-export const photos: Photo[] = generatePhotos(50);
+const generatedPhotos: Photo[] = generatePhotos(50);
+
+const newPhotos: Photo[] = [
+  {
+    id: 51,
+    width: 1200,
+    height: 800,
+    photographer: 'User',
+    src: 'https://lh3.googleusercontent.com/d/1rd75pUuDVFp7JpKxIVCVshf_iXZRdrfb',
+    alt: 'A person standing on a rock looking at a waterfall',
+    tags: ['nature', 'waterfall', 'person', 'landscape', 'travel'],
+    dataAiHint: 'nature waterfall',
+  },
+  {
+    id: 52,
+    width: 1200,
+    height: 800,
+    photographer: 'User',
+    src: 'https://lh3.googleusercontent.com/d/1bcb-qd0evn_aC1SQqfFhhUjkW-1iTYG0',
+    alt: 'A city skyline at night with lights reflecting on the water',
+    tags: ['city', 'night', 'skyline', 'water', 'urban'],
+    dataAiHint: 'city night',
+  },
+  {
+    id: 53,
+    width: 1200,
+    height: 800,
+    photographer: 'User',
+    src: 'https://lh3.googleusercontent.com/d/1UNCuLUBebO4eA-u5-OHGuvFjK2FE0SV_',
+    alt: 'A close-up of a flower with vibrant colors',
+    tags: ['flower', 'nature', 'closeup', 'colorful', 'plant'],
+    dataAiHint: 'flower nature',
+  },
+  {
+    id: 54,
+    width: 1200,
+    height: 800,
+    photographer: 'User',
+    src: 'https://lh3.googleusercontent.com/d/1l_FM745QYr5SsuJdTZWHgimQLI7OJCad',
+    alt: 'A forest with tall trees and sunlight filtering through',
+    tags: ['forest', 'trees', 'nature', 'sunlight', 'landscape'],
+    dataAiHint: 'forest trees',
+  },
+  {
+    id: 55,
+    width: 1200,
+    height: 800,
+    photographer: 'User',
+    src: 'https://lh3.googleusercontent.com/d/1Yy6EH1nMSOX1iPLyTrJ5oO8B241HeoSt',
+    alt: 'A sandy beach with waves crashing on the shore',
+    tags: ['beach', 'ocean', 'sand', 'water', 'summer'],
+    dataAiHint: 'beach ocean',
+  },
+];
+
+export const photos: Photo[] = [...newPhotos, ...generatedPhotos];
